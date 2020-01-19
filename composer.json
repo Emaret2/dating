@@ -1,0 +1,12 @@
+{
+  "name": "emaret/328/dating",
+  "authors": [
+    {
+      "name": "Elijah Maret",
+      "email": "emaret2@mail.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core":"dev-master"
+  }
+}
