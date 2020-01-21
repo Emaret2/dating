@@ -1,9 +1,54 @@
+@font-face { font-family: Symbols; src: url('symbols.ttf'); }
+
 body {
     /* background-color: lightblue; */
+
 }
 
 #main {
-    border: 1px solid gray;
+
+    border-color: gray;
+    /*
     background-color: white;
     border-radius: 10px;
+    */
+    font-size: 1em;
+}
+
+h1 {
+    text-align: center;
+}
+
+.alien {
+    font-family: Symbols;
+}
+
+.droid {
+    font-family: "Lucida Console";
+    font-size: .8em;
+    background-color: black;
+    color: white;
+}
+
+.droid-begin {
+    color: red;
+}
+
+.droid-init {
+    color: yellow;
+}
+.command {
+    color: limegreen;
+}
+
+.normal {
+    font-family: Calibri;
+}
+
+.lead {
+    font-size: 1em;
+}
+
+img {
+    width: 90%;
 }
