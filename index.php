@@ -1,4 +1,14 @@
 <?php
+/*
+ * Elijah Maret
+ * IT 328
+ * 1/16/2020
+ * Dating Website
+ *
+ * index.php
+ *
+ * This is the controller file for my dating website assignment it redirects to home.html
+*/
 
 //The Controller
 
