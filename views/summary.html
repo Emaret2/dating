@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- My Css -->
+    <link rel="stylesheet" type="text/css"
+          href="styles/styles.css">
+    <link rel="stylesheet" type="text/css"
+          href="styles/form.css">
+
+    <title>Profile</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpg" href="images/heart.jpg">
+
+</head>
+<body>
+<header class="navbar"><a href = "home">Galactic Dating Website</a></header>
+    <div class="container border rounded">
+
+        <!-- New Background check on top of form -->
+        <div class="row">
+            <div class = "col-md-6 ">
+                    <div class="m-3 border rounded">
+                    <div class="border-bottom p-2">Name: {{ @SESSION.firstName }} {{ @SESSION.lastName }}</div>
+                    <div class="border-bottom p-2">Gender: {{ @SESSION.gender }}</div>
+                    <div class="border-bottom p-2">Age: {{ @SESSION.age }}</div>
+                    <div class="border-bottom p-2">Phone: {{ @SESSION.phone }}</div>
+                    <div class="border-bottom p-2">Email: {{ @SESSION.email }}</div>
+                    <div class="border-bottom p-2">State: {{ @SESSION.state }}</div>
+                    <div class="border-bottom p-2">Seeking: {{ @SESSION.seeking }}</div>
+                    <div class="p-2">Interests: {{ @SESSION.interests[0] }} {{ @SESSION.interests[1] }}
+                        {{ @SESSION.interests[2] }} {{ @SESSION.interests[3] }} {{ @SESSION.interests[4] }}
+                        {{ @SESSION.interests[5] }} {{ @SESSION.interests[6] }} {{ @SESSION.interests[7] }}
+                        {{ @SESSION.interests[8] }} {{ @SESSION.interests[9] }} {{ @SESSION.interests[10] }}
+                        {{ @SESSION.interests[11] }} {{ @SESSION.interests[12] }} {{ @SESSION.interests[13] }}
+                        {{ @SESSION.interests[14] }}
+                    </div>
+                </div>
+            </div>
+
+            <div class = "col-md-6 p-2">
+                <div class="center-block w-75 mx-auto">
+                    <img src="images/default.png">
+                </div>
+
+                <div class="m-4">
+                    <h6>Biography</h6>
+                    <p>{{ @SESSION.biography }}</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="mx-auto p-4 text-center">
+                <a class="btn btn-primary btn-lg" href="personal" role="button">Contact Me!</a>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>
