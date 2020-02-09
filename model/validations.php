@@ -22,8 +22,22 @@ function validPhone($phone) {
 }
 
 function validEmail($email) {
-    if (!empty($id) && preg_match('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/',$id)){
+    if (!empty($email) && preg_match('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/',$email)){
         return;
     }
     return false;
+}
+
+function validOutdoor($array) {
+    global $f3;
+    for ($i = 0; $i < sizeof($array); $i ++) {
+        return in_array($array[$i], $f3->get('outdoorInterests'));
+    }
+}
+
+function validIndoor($array) {
+    global $f3;
+    for ($i = 0; $i < sizeof($array); $i ++) {
+        return in_array($array[$i], $f3->get('indoorInterests'));
+    }
 }
