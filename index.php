@@ -25,6 +25,11 @@ require_once('vendor/autoload.php');
 //Create an instance of the base class
 $f3 = Base::instance();
 
+$f3->set('indoorInterests', array("Tv", "Movies", "Cooking", "Board games", "Puzzles",
+    "Reading", "Playing cards", "Videogames"));
+
+$f3->set('indoorInterests', array("Hiking", "Biking", "Swimming", "Collecting", "Walking", "Climbing"));
+
 //Define a default route
 
 $f3->route('GET /', function() {
