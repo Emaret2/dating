@@ -44,115 +44,39 @@ This file acts is the view for the interests form for my Dating 2 assignment
         <fieldset class="form-group col-md-12">
             <p><strong>In-Door Interests</strong></p>
             <div class="form-row form-group container">
-                <div class="form-check col-md-3">
-                    <input class="form-check-input" type="checkbox" name="indoorInterests[]" id="tv" value="tv">
-                    <label class="form-check-label" for="tv">
-                        TV
-                    </label>
-                </div>
+                <repeat group="{{ @indoorInterests }}" value="{{ @interest }}">
+                    <div class="form-check col-md-3">
+                        <input class="form-check-input" type="checkbox" name="indoorInterests[]" id="{{ @interest }}" value="{{ @interest }}">
+                        <label class="form-check-label" for="{{ @interest }}">
+                            {{ @interest }}
+                        </label>
+                    </div>
+                    <check if="{{ @interest == @indoorInterests[3] }}">
+                        </div>
 
-                <div class="form-check col-md-3">
-                    <input class="form-check-input" type="checkbox" name="indoorInterests[]" id="movies" value="movies">
-                    <label class="form-check-label" for="movies">
-                        Movies
-                    </label>
-                </div>
+                        <div class="form-row form-group container">
+                    </check>
+                </repeat>
 
-
-                <div class="form-check col-md-3">
-                    <input class="form-check-input" type="checkbox" name="indoorInterests[]" id="cooking" value="cooking">
-                    <label class="form-check-label" for="cooking">
-                        Cooking
-                    </label>
-                </div>
-
-                <div class="form-check col-md-3">
-                    <input class="form-check-input" type="checkbox" name="indoorInterests[]" id="boardgames" value="boardgames">
-                    <label class="form-check-label" for="boardgames">
-                        Board Games
-                    </label>
-                </div>
-            </div>
-
-            <div class="form-row form-group container">
-                <div class="form-check col-md-3">
-                    <input class="form-check-input" type="checkbox" name="indoorInterests[]" id="puzzles" value="puzzles">
-                    <label class="form-check-label" for="puzzles">
-                        Puzzles
-                    </label>
-                </div>
-
-                <div class="form-check col-md-3">
-                    <input class="form-check-input" type="checkbox" name="indoorInterests[]" id="reading" value="reading">
-                    <label class="form-check-label" for="reading">
-                        Reading
-                    </label>
-                </div>
-
-                <div class="form-check col-md-3">
-                    <input class="form-check-input" type="checkbox" name="indoorInterests[]" id="cards" value="cards">
-                    <label class="form-check-label" for="cards">
-                        Playing Cards
-                    </label>
-                </div>
-
-                <div class="form-check col-md-3">
-                    <input class="form-check-input" type="checkbox" name="indoorInterests[]" id="videogames" value="videogames">
-                    <label class="form-check-label" for="videogames">
-                        Videogames
-                    </label>
-                </div>
             </div>
         </fieldset>
 
         <fieldset class="form-group col-md-12">
             <p><strong>Out-Door Interests</strong></p>
             <div class="form-row form-group container">
-                <div class="form-check col-md-3">
-                    <input class="form-check-input" type="checkbox" name="outdoorInterests[]" id="hiking" value="hiking">
-                    <label class="form-check-label" for="hiking">
-                        Hiking
-                    </label>
-                </div>
+                <repeat group="{{ @outdoorInterests }}" value="{{ @interest }}">
+                    <div class="form-check col-md-3">
+                        <input class="form-check-input" type="checkbox" name="indoorInterests[]" id="{{ @interest }}" value="{{ @interest }}">
+                        <label class="form-check-label" for="{{ @interest }}">
+                            {{ @interest }}
+                        </label>
+                    </div>
+                    <check if="{{ @interest == @outdoorInterests[3] }}">
+                        </div>
 
-                <div class="form-check col-md-3">
-                    <input class="form-check-input" type="checkbox" name="outdoorInterests[]" id="biking" value="biking">
-                    <label class="form-check-label" for="biking">
-                        Biking
-                    </label>
-                </div>
-
-                <div class="form-check col-md-3">
-                    <input class="form-check-input" type="checkbox" name="outdoorInterests[]" id="swimming" value="swimming">
-                    <label class="form-check-label" for="swimming">
-                        Swimming
-                    </label>
-                </div>
-
-                <div class="form-check col-md-3">
-                    <input class="form-check-input" type="checkbox" name="outdoorInterests[]" id="collecting" value="collecting">
-                    <label class="form-check-label" for="collecting">
-                        Collecting
-                    </label>
-                </div>
-
-
-            </div>
-
-            <div class="form-row form-group container">
-                <div class="form-check col-md-3">
-                    <input class="form-check-input" type="checkbox" name="outdoorInterests[]" id="walking" value="walking">
-                    <label class="form-check-label" for="walking">
-                        Walking
-                    </label>
-                </div>
-
-                <div class="form-check col-md-3">
-                    <input class="form-check-input" type="checkbox" name="outdoorInterests[]" id="climbing" value="climbing">
-                    <label class="form-check-label" for="climbing">
-                        Climbing
-                    </label>
-                </div>
+                        <div class="form-row form-group container">
+                    </check>
+                </repeat>
             </div>
 
 
