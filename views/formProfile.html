@@ -45,7 +45,7 @@ This file acts is the view for the profile creation form for my Dating 2 assignm
             <div class="form-row ">
                 <div class="form-group col-md-12">
                     <label for="biography"><strong>Biography</strong></label>
-                    <textarea class = "form-control" id="biography" name="biography"></textarea>
+                    <textarea class = "form-control" id="biography" name="biography">{{@biography}}</textarea>
                 </div>
             </div>
         </fieldset>
@@ -58,29 +58,50 @@ This file acts is the view for the profile creation form for my Dating 2 assignm
                 <!--email-->
                 <div class="form-group col-md-12">
                     <label for="email"><strong>Email</strong></label>
-                    <input type="email" class="form-control" id="email" placeholder="" name="email">
+                    <input type="email" class="form-control" id="email" placeholder="" name="email"
+                                value = "{{@email}}">
                 </div>
+                <check if="{{ @errors['email'] }}">
+                    <span class="err">{{ @errors['email'] }}</span>
+                </check><br><br>
 
                 <div class="form-group col-md-12">
                     <label for="state"><strong>State</strong></label>
                     <select id="state" name="state" class="form-control">  <!-- Elijah Edit: Fixed the state dropdown to have a value for Washington-->
                         <repeat group="{{ @states }}" value="{{ @currentState }}">
-                            <option value="{{ @currentState }}">{{ @currentState }}</option>
+                            <option value="{{ @currentState }}"
+
+                            <check if="{{ @state == @currentState}}">
+                                selected='selected'
+                            </check>
+                            >{{ @currentState }}</option>
                         </repeat>
                     </select>
+                    <check if="{{ @errors['state'] }}">
+                        <span class="err">{{ @errors['state'] }}</span>
+                    </check><br><br>
                 </div>
 
                 <!--Seeking-->
                 <div class="form-group col-md-12">
                     <label><strong>Seeking</strong></label><br>
-                    <div id ="seeking" class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name= "seeking" id="seeking-m" value="male">
-                        <label class="form-check-label" for="seeking-m">Male</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="seeking" id="seeking-f" value="female">
-                        <label class="form-check-label" for="seeking-f">Female</label>
-                    </div>
+                    <repeat group="{{ @genders }}" value="{{ @currentGender }}">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio"
+                                   name="seeking"
+                                   id="seeking-{{ @currentGender }}"
+                                   value="{{ @currentGender }}"
+                            <check if="{{ @seeking == @currentGender }}">
+                                checked='checked'
+                            </check>
+                            >
+                            <label class="form-check-label" for="seeking-{{ @currentGender }}">{{ @currentGender }}</label>
+                        </div>
+
+                    </repeat>
+                    <check if="{{ @errors['seeking'] }}">
+                        <span class="err">{{ @errors['seeking'] }}</span>
+                    </check><br><br>
 
 
                 </div>

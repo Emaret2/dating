@@ -127,7 +127,7 @@ $f3->route('GET|POST /profile', function($f3) {
 
 
             //Redirect to Summary
-            $f3->reroute('/profile');
+            $f3->reroute('/interests');
         }
     }
 

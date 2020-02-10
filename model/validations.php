@@ -45,10 +45,22 @@ function validProfile(){
     $isValid = true;
 
     if (!validEmail($f3->get('email'))) {
-
         $isValid = false;
         $f3->set("errors['email']", "Invalid Email");
     }
+
+    if (!validState($f3->get('state'))) {
+        $isValid = false;
+        $f3->set("errors['state']", "Enter one of the United States");
+    }
+
+    if (!validGender($f3->get('seeking'))) {
+
+        $isValid = false;
+        $f3->set("errors['seeking']", "Please choose one of the options");
+    }
+
+    return $isValid;
 
 }
 
@@ -76,7 +88,7 @@ function validPhone($phone) {
 
 function validEmail($email) {
     if (!empty($email) && preg_match('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/',$email)){
-        return;
+        return true;
     }
     return false;
 }
