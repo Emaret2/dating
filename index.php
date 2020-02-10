@@ -36,10 +36,10 @@ $f3->set('states', array('Alabama', 'Alaska', 'Arizona' ,'Arkansas', 'California
 
 $f3->set('genders', array("Male", "Female", "Other"));
 
-$f3->set('indoorInterests', array("TV", "Movies", "Cooking", "Board games", "Puzzles",
+$f3->set('indoorInterestsAll', array("TV", "Movies", "Cooking", "Board games", "Puzzles",
     "Reading", "Playing cards", "Videogames"));
 
-$f3->set('outdoorInterests', array("Hiking", "Biking", "Swimming", "Collecting", "Walking", "Climbing"));
+$f3->set('outdoorInterestsAll', array("Hiking", "Biking", "Swimming", "Collecting", "Walking", "Climbing"));
 
 //Define a default route
 
@@ -136,8 +136,38 @@ $f3->route('GET|POST /profile', function($f3) {
     echo $view->render('views/formProfile.html');
 });
 
-$f3->route('GET|POST /interests', function() {
+$f3->route('GET|POST /interests', function($f3) {
     //var_dump($_POST);
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        //Get data from form
+        if(!empty($_POST['outdoorInterests'])){
+            $outInts = $_POST['outdoorInterests'];
+        }
+        if(!empty($_POST['indoorInterests'])){
+            $inInts = $_POST['indoorInterests'];
+        }
+
+        //$selectedCondiments = !empty($_POST['condiments']) ? $_POST['condiments'] : array();
+
+
+        //Add data to hive
+        $f3->set('outInts', $outInts);
+        $f3->set('inInts', $inInts);
+
+        //If data is valid
+        if (validInterests()) {
+
+            //Write data to Session
+            $_SESSION['outdoorInterests'] = $_POST['outdoorInterests'];
+            $_SESSION['indoorInterests'] = $_POST['indoorInterests'];
+
+
+
+            //Redirect to Summary
+            $f3->reroute('/summary');
+        }
+    }
 
     $view = new Template();
     echo $view->render('views/formInterests.html');
@@ -145,8 +175,7 @@ $f3->route('GET|POST /interests', function() {
 
 $f3->route('GET /summary', function() {
     //var_dump($_SESSION);
-    $_SESSION['outdoorInterests'] = $_POST['outdoorInterests'];
-    $_SESSION['indoorInterests'] = $_POST['indoorInterests'];
+
     $view = new Template();
     echo $view->render('views/summary.html');
 });

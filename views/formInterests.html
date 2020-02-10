@@ -44,45 +44,80 @@ This file acts is the view for the interests form for my Dating 2 assignment
         <fieldset class="form-group col-md-12">
             <p><strong>In-Door Interests</strong></p>
             <div class="form-row form-group container">
-                <repeat group="{{ @indoorInterests }}" value="{{ @interest }}">
+                <repeat group="{{ @indoorInterestsAll }}" value="{{ @interest }}">
                     <div class="form-check col-md-3">
-                        <input class="form-check-input" type="checkbox" name="indoorInterests[]" id="{{ @interest }}" value="{{ @interest }}">
+                        <input class="form-check-input" type="checkbox" name="indoorInterests[]"
+                               id="{{ @interest }}"
+                               value="{{ @interest }}"
+                        <check if="{{ isset(@inInts) && in_array(@interest, @inInts) }}">
+                            checked='checked'
+                        </check>
+                        >
                         <label class="form-check-label" for="{{ @interest }}">
                             {{ @interest }}
                         </label>
                     </div>
-                    <check if="{{ @interest == @indoorInterests[3] }}">
+                    <check if="{{ @interest == @indoorInterestsAll[3] }}">
                         </div>
 
                         <div class="form-row form-group container">
                     </check>
                 </repeat>
 
+
             </div>
+            <check if="{{ @error['indoorInterest'] }}">
+                <span class="err">{{ @error['indoorInterest'] }}</span>
+                <br><br>
+            </check>
+            <check if="{{ @warning['indoorInterestZero'] }}">
+                <span class="warn">{{ @warning['indoorInterestZero'] }}</span>
+                <br><br>
+            </check>
+
         </fieldset>
 
         <fieldset class="form-group col-md-12">
             <p><strong>Out-Door Interests</strong></p>
             <div class="form-row form-group container">
-                <repeat group="{{ @outdoorInterests }}" value="{{ @interest }}">
+                <repeat group="{{ @outdoorInterestsAll }}" value="{{ @interest }}">
                     <div class="form-check col-md-3">
-                        <input class="form-check-input" type="checkbox" name="indoorInterests[]" id="{{ @interest }}" value="{{ @interest }}">
+                        <input class="form-check-input" type="checkbox" name="outdoorInterests[]"
+                               id="{{ @interest }}"
+                               value="{{ @interest }}"
+                        <check if="{{ isset(@outInts) && in_array(@interest, @outInts) }}">
+                            checked='checked'
+                        </check>
+                        >
                         <label class="form-check-label" for="{{ @interest }}">
                             {{ @interest }}
                         </label>
                     </div>
-                    <check if="{{ @interest == @outdoorInterests[3] }}">
+                    <check if="{{ @interest == @outdoorInterestsAll[3] }}">
                         </div>
 
                         <div class="form-row form-group container">
                     </check>
+
                 </repeat>
+
             </div>
+            <check if="{{ @error['outdoorInterest'] }}">
+                <span class="err">{{ @error['outdoorInterest'] }}</span>
+                <br><br>
+            </check>
+            <check if="{{ @warning['outdoorInterestZero'] }}">
+                <span class="warn">{{ @warning['outdoorInterestZero'] }}</span>
+                <br><br>
+            </check>
 
 
 
         </fieldset>
 
+        <check if="{{ @error['interestZero'] }}">
+            <span class="err">{{ @error['interestZero'] }}</span>
+        </check><br><br>
 
 
         <div class = "text-right p-2">

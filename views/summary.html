@@ -46,12 +46,13 @@ This file acts is the view for the summary page for my Dating 2 assignment
                     <div class="border-bottom p-2">Email: {{ @SESSION.email }}</div>
                     <div class="border-bottom p-2">State: {{ @SESSION.state }}</div>
                     <div class="border-bottom p-2">Seeking: {{ @SESSION.seeking }}</div>
-                    <div class="p-2">Interests: {{ @SESSION.interests[0] }} {{ @SESSION.interests[1] }}
-                        {{ @SESSION.interests[2] }} {{ @SESSION.interests[3] }} {{ @SESSION.interests[4] }}
-                        {{ @SESSION.interests[5] }} {{ @SESSION.interests[6] }} {{ @SESSION.interests[7] }}
-                        {{ @SESSION.interests[8] }} {{ @SESSION.interests[9] }} {{ @SESSION.interests[10] }}
-                        {{ @SESSION.interests[11] }} {{ @SESSION.interests[12] }} {{ @SESSION.interests[13] }}
-                        {{ @SESSION.interests[14] }}
+                    <div class="p-2">Interests:
+                        <repeat group="{{ @SESSION.indoorInterests }}" value="{{ @interest }}">
+                            {{ @interest }}
+                        </repeat>
+                        <repeat group="{{ @SESSION.outdoorInterests }}" value="{{ @interest }}">
+                            {{ @interest }}
+                        </repeat>
                     </div>
                 </div>
             </div>

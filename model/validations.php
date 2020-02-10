@@ -64,6 +64,36 @@ function validProfile(){
 
 }
 
+function validInterests() {
+    global $f3;
+    $isValid = true;
+
+    if(sizeof($f3->get('outInts')) == 0){
+        if(sizeof($f3->get('inInts')) == 0){ // no interests selected
+            $isValid = false;
+            $f3->set("error['interestZero']", "Please select at least one interest");
+            $f3->set("warning['outdoorInterestZero']", "No Outdoor Interests Selected");
+        } else {
+        $f3->set("warning['outdoorInterestZero']", "No Outdoor Interests Selected");
+        }
+    }
+
+    else if (!validOutdoor($f3->get('outInts'))) {
+        $isValid = false;
+        $f3->set("errors['outdoorInterest']", "Invalid Outdoor Interest");
+    }
+
+    if(sizeof($f3->get('inInts')) == 0){
+        $f3->set("warning['indoorInterestZero']", "No Indoor Interests Selected");
+    }
+    else if (!validIndoor($f3->get('inInts'))) {
+        $isValid = false;
+        $f3->set("errors['indoorInterests']", "Invalid Indoor Interest");
+    }
+
+    return $isValid;
+}
+
 
 function validName($name) {
     return !empty($name) && ctype_alpha($name);
@@ -95,16 +125,23 @@ function validEmail($email) {
 
 function validOutdoor($array) {
     global $f3;
+
     for ($i = 0; $i < sizeof($array); $i ++) {
-        return in_array($array[$i], $f3->get('outdoorInterests'));
+        if(!in_array($array[$i], $f3->get('outdoorInterestsAll'))){
+            return false;
+        }
     }
+    return true;
 }
 
 function validIndoor($array) {
     global $f3;
     for ($i = 0; $i < sizeof($array); $i ++) {
-        return in_array($array[$i], $f3->get('indoorInterests'));
+        if(!in_array($array[$i], $f3->get('indoorInterestsAll'))){
+            return false;
+        }
     }
+    return true;
 }
 
 function validGender($gender) {
