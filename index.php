@@ -34,7 +34,7 @@ $f3->set('states', array('Alabama', 'Alaska', 'Arizona' ,'Arkansas', 'California
     'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
     'West Virginia', 'Wisconsin', 'Wyoming'));
 
-$f3->set('genders', array("Male", "Female", "Other"));
+$f3->set('genders', array("Male", "Female"));
 
 $f3->set('indoorInterestsAll', array("TV", "Movies", "Cooking", "Board games", "Puzzles",
     "Reading", "Playing cards", "Videogames"));

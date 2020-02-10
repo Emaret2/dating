@@ -23,11 +23,11 @@ function validPersonal() {
         $f3->set("errors['age']", "Please enter an age between 18 and 118");
     }
 
-    if (!validGender($f3->get('gender'))) {
-
-        $isValid = false;
-        $f3->set("errors['gender']", "Please choose one of the options");
-    }
+//    if (!validGender($f3->get('gender'))) {
+//
+//        $isValid = false;
+//        $f3->set("errors['gender']", "Please choose one of the options");
+//    }
 
     if (!validPhone($f3->get('phone'))) {
 
@@ -54,11 +54,11 @@ function validProfile(){
         $f3->set("errors['state']", "Enter one of the United States");
     }
 
-    if (!validGender($f3->get('seeking'))) {
-
-        $isValid = false;
-        $f3->set("errors['seeking']", "Please choose one of the options");
-    }
+//    if (!validGender($f3->get('seeking'))) {
+//
+//        $isValid = false;
+//        $f3->set("errors['seeking']", "Please choose one of the options");
+//    }
 
     return $isValid;
 
@@ -70,7 +70,7 @@ function validInterests() {
 
     if(sizeof($f3->get('outInts')) == 0){
         if(sizeof($f3->get('inInts')) == 0){ // no interests selected
-            $isValid = false;
+            //$isValid = false;
             $f3->set("error['interestZero']", "Please select at least one interest");
             $f3->set("warning['outdoorInterestZero']", "No Outdoor Interests Selected");
         } else {
