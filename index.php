@@ -26,6 +26,14 @@ require_once('model/validations.php');
 //Create an instance of the base class
 $f3 = Base::instance();
 
+$f3->set('states', array('Alabama', 'Alaska', 'Arizona' ,'Arkansas', 'California', 'Colorado', 'Connecticut',
+    'Delaware', 'District Of Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana',
+    'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+    'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
+    'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+    'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
+    'West Virginia', 'Wisconsin', 'Wyoming'));
+
 $f3->set('genders', array("Male", "Female", "Other"));
 
 $f3->set('indoorInterests', array("TV", "Movies", "Cooking", "Board games", "Puzzles",
@@ -88,8 +96,41 @@ $f3->route('GET|POST /personal', function($f3) {
 });
 
 
-$f3->route('GET|POST /profile', function() {
+$f3->route('GET|POST /profile', function($f3) {
     //var_dump($_POST);
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        //Get data from form
+        $email = $_POST['email'];
+        $state = $_POST['state'];
+        $seeking = $_POST['seeking'];
+        $biography = $_POST['biography'];
+
+        //$selectedCondiments = !empty($_POST['condiments']) ? $_POST['condiments'] : array();
+
+
+        //Add data to hive
+        $f3->set('email', $email);
+        $f3->set('state', $state);
+        $f3->set('seeking', $seeking);
+        $f3->set('biography', $biography);
+
+        //If data is valid
+        if (validProfile()) {
+
+            //Write data to Session
+            $_SESSION['email'] = $_POST['email'];
+            $_SESSION['state'] = $_POST['state'];
+            $_SESSION['seeking'] = $_POST['seeking'];
+            $_SESSION['biography'] = $_POST['biography'];
+
+
+
+            //Redirect to Summary
+            $f3->reroute('/profile');
+        }
+    }
+
 
     $view = new Template();
     echo $view->render('views/formProfile.html');
@@ -97,10 +138,6 @@ $f3->route('GET|POST /profile', function() {
 
 $f3->route('GET|POST /interests', function() {
     //var_dump($_POST);
-    $_SESSION['email'] = $_POST['email'];
-    $_SESSION['state'] = $_POST['state'];
-    $_SESSION['seeking'] = $_POST['seeking'];
-    $_SESSION['biography'] = $_POST['biography'];
 
     $view = new Template();
     echo $view->render('views/formInterests.html');

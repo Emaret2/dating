@@ -43,6 +43,13 @@ function validPersonal() {
 function validProfile(){
     global $f3;
     $isValid = true;
+
+    if (!validEmail($f3->get('email'))) {
+
+        $isValid = false;
+        $f3->set("errors['email']", "Invalid Email");
+    }
+
 }
 
 
@@ -88,8 +95,12 @@ function validIndoor($array) {
     }
 }
 
-function validGender($array) {
+function validGender($gender) {
     global $f3;
-    return in_array($array, $f3->get('genders'));
+    return in_array($gender, $f3->get('genders'));
+}
 
+function validState($state) {
+    global $f3;
+    return in_array($state, $f3->get('states'));
 }
