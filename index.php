@@ -13,14 +13,15 @@
 
 //The Controller
 
+//Require the autoload file
+require_once('vendor/autoload.php');
+
 session_start();
 
 //Turn on error reporting
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-//Require the autoload file
-require_once('vendor/autoload.php');
 require_once('model/validations.php');
 
 //Create an instance of the base class
@@ -54,10 +55,10 @@ $f3->route('GET /home', function() {
 });
 
 
-
 $f3->route('GET|POST /personal', function($f3) {
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
 
         //Get data from form
         $firstName = $_POST['firstName'];
@@ -66,28 +67,36 @@ $f3->route('GET|POST /personal', function($f3) {
         $gender = $_POST['gender'];
         $phone = $_POST['phone'];
 
-        //$selectedCondiments = !empty($_POST['condiments']) ? $_POST['condiments'] : array();
+
+
 
 
         //Add data to hive
-        $f3->set('firstName', $firstName);
-        $f3->set('lastName', $lastName);
-        $f3->set('age', $age);
-        $f3->set('gender', $gender);
-        $f3->set('phone', $phone);
+
+
 
         //If data is valid
         if (validPersonal()) {
 
+            if(!empty($_POST['isPremium'])){
+                $member = new PremiumMember($firstName, $lastName, $age, $gender, $phone);
+                $f3->set('premium', true);
+            } else {
+                $member = new Member($firstName, $lastName, $age, $gender, $phone);
+                $f3->set('premium', false);
+            }
+
             //Write data to Session
-            $_SESSION['firstName'] = $_POST['firstName'];
-            $_SESSION['lastName'] = $_POST['lastName'];
-            $_SESSION['age'] = $_POST['age'];
-            $_SESSION['gender'] = $_POST['gender'];
-            $_SESSION['phone'] = $_POST['phone'];
+            $_SESSION['member'] = $member;
+
+            $f3->set('newMember', $member);
+
 
             //Redirect to Summary
             $f3->reroute('/profile');
+        } else {
+            //Add POST array data to f3 hive for "sticky" form
+            $f3->set('personal', $_POST);
         }
     }
 
@@ -100,34 +109,39 @@ $f3->route('GET|POST /profile', function($f3) {
     //var_dump($_POST);
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        //Get data from form
-        $email = $_POST['email'];
-        $state = $_POST['state'];
-        $seeking = $_POST['seeking'];
-        $biography = $_POST['biography'];
+        $member = $_SESSION['member'];
+
 
         //$selectedCondiments = !empty($_POST['condiments']) ? $_POST['condiments'] : array();
 
 
         //Add data to hive
-        $f3->set('email', $email);
-        $f3->set('state', $state);
-        $f3->set('seeking', $seeking);
-        $f3->set('biography', $biography);
+
 
         //If data is valid
         if (validProfile()) {
 
+            //Get data from form
+            $member->setEmail($_POST['email']);
+            $member->setState($_POST['state']);
+            $member->setSeeking($_POST['seeking']);
+            $member->setBio($_POST['biography']);
+
+            $f3->set('newMember', $member);
+
+
             //Write data to Session
-            $_SESSION['email'] = $_POST['email'];
-            $_SESSION['state'] = $_POST['state'];
-            $_SESSION['seeking'] = $_POST['seeking'];
-            $_SESSION['biography'] = $_POST['biography'];
-
-
+            $_SESSION['member'] = $member;
 
             //Redirect to Summary
-            $f3->reroute('/interests');
+            if(is_a($member, 'PremiumMember')) {
+                $f3->reroute('/interests');
+            } else {
+                $f3->reroute('/summary');
+            }
+        } else {
+            //Add POST array data to f3 hive for "sticky" form
+            $f3->set('profile', $_POST);
         }
     }
 
@@ -140,32 +154,38 @@ $f3->route('GET|POST /interests', function($f3) {
     //var_dump($_POST);
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        //Get data from form
-        if(!empty($_POST['outdoorInterests'])){
-            $outInts = $_POST['outdoorInterests'];
-        }
-        if(!empty($_POST['indoorInterests'])){
-            $inInts = $_POST['indoorInterests'];
-        }
+        $member = $_SESSION['member'];
+
 
         //$selectedCondiments = !empty($_POST['condiments']) ? $_POST['condiments'] : array();
 
 
-        //Add data to hive
-        $f3->set('outInts', $outInts);
-        $f3->set('inInts', $inInts);
+
 
         //If data is valid
         if (validInterests()) {
 
+            //Get data from form
+
+            if(!empty($_POST['outdoorInterests'])){
+                $member->setOutDoorInterests($_POST['outdoorInterests']);
+            }
+            if(!empty($_POST['indoorInterests'])){
+                $member->setInDoorInterests($_POST['indoorInterests']);
+            }
+
+
+            //Add data to hive
+            $f3->set('newMember', $member);
+
             //Write data to Session
-            $_SESSION['outdoorInterests'] = $_POST['outdoorInterests'];
-            $_SESSION['indoorInterests'] = $_POST['indoorInterests'];
-
-
+            $_SESSION['member'] = $member;
 
             //Redirect to Summary
             $f3->reroute('/summary');
+        }else {
+            //Add POST array data to f3 hive for "sticky" form
+            $f3->set('interests', $_POST);
         }
     }
 
@@ -173,8 +193,31 @@ $f3->route('GET|POST /interests', function($f3) {
     echo $view->render('views/formInterests.html');
 });
 
-$f3->route('GET /summary', function() {
+$f3->route('GET /summary', function($f3) {
     //var_dump($_SESSION);
+
+    $member = $_SESSION['member'];
+
+    $f3->set('fname', $member->getFname());
+    $f3->set('lname', $member->getLname());
+    $f3->set('gender', $member->getGender());
+    $f3->set('age', $member->getAge());
+    $f3->set('phone', $member->getPhone());
+    $f3->set('email', $member->getEmail());
+    $f3->set('state', $member->getState());
+    $f3->set('seeking', $member->getSeeking());
+
+    if(is_a($member, 'PremiumMember')) {
+        $f3->set('premium', true);
+        $f3->set('indoorInterests', $member->getInDoorInterests());
+        $f3->set('outdoorInterests', $member->getOutDoorInterests());
+    }
+
+
+
+//    echo "<pre>";
+//    print_r($member);
+//    echo "</pre>";
 
     $view = new Template();
     echo $view->render('views/summary.html');

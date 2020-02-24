@@ -5,19 +5,19 @@ function validPersonal() {
     global $f3;
     $isValid = true;
 
-    if (!validName($f3->get('firstName'))) {
+    if (!validName($_POST['firstName'])) {
 
         $isValid = false;
         $f3->set("errors['firstName']", "Please enter your first name");
     }
 
-    if (!validName($f3->get('lastName'))) {
+    if (!validName($_POST['lastName'])) {
 
         $isValid = false;
         $f3->set("errors['lastName']", "Please enter your last name");
     }
 
-    if (!validAge($f3->get('age'))) {
+    if (!validAge($_POST['age'])) {
 
         $isValid = false;
         $f3->set("errors['age']", "Please enter an age between 18 and 118");
@@ -29,7 +29,7 @@ function validPersonal() {
 //        $f3->set("errors['gender']", "Please choose one of the options");
 //    }
 
-    if (!validPhone($f3->get('phone'))) {
+    if (!validPhone($_POST['phone'])) {
 
         $isValid = false;
         $f3->set("errors['phone']", "Invalid phone");
@@ -44,12 +44,12 @@ function validProfile(){
     global $f3;
     $isValid = true;
 
-    if (!validEmail($f3->get('email'))) {
+    if (!validEmail($_POST['email'])) {
         $isValid = false;
         $f3->set("errors['email']", "Invalid Email");
     }
 
-    if (!validState($f3->get('state'))) {
+    if (!validState($_POST['state'])) {
         $isValid = false;
         $f3->set("errors['state']", "Enter one of the United States");
     }
@@ -68,9 +68,9 @@ function validInterests() {
     global $f3;
     $isValid = true;
 
-    if(sizeof($f3->get('outInts')) == 0){
-        if(sizeof($f3->get('inInts')) == 0){ // no interests selected
-            //$isValid = false;
+    if(sizeof(($_POST['outdoorInterests'])) == 0){
+        if(sizeof($_POST['indoorInterests']) == 0){ // no interests selected
+            $isValid = false;
             $f3->set("error['interestZero']", "Please select at least one interest");
             $f3->set("warning['outdoorInterestZero']", "No Outdoor Interests Selected");
         } else {
@@ -78,7 +78,7 @@ function validInterests() {
         }
     }
 
-    else if (!validOutdoor($f3->get('outInts'))) {
+    else if (!validOutdoor(($_POST['outdoorInterests']))) {
         $isValid = false;
         $f3->set("errors['outdoorInterest']", "Invalid Outdoor Interest");
     }
@@ -86,7 +86,7 @@ function validInterests() {
     if(sizeof($f3->get('inInts')) == 0){
         $f3->set("warning['indoorInterestZero']", "No Indoor Interests Selected");
     }
-    else if (!validIndoor($f3->get('inInts'))) {
+    else if (!validIndoor($_POST['indoorInterests'])) {
         $isValid = false;
         $f3->set("errors['indoorInterests']", "Invalid Indoor Interest");
     }

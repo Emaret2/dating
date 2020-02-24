@@ -54,7 +54,7 @@ This file acts is the view for the personal information form for my Dating 2 ass
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="firstName"><strong>First Name</strong></label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" value="{{ @firstName }}">
+                    <input type="text" class="form-control" id="firstName" name="firstName" value="{{ @personal['firstName'] }}">
                 </div>
                 <check if="{{ @errors['firstName'] }}">
                     <span class="err">{{ @errors['firstName'] }}</span>
@@ -63,7 +63,7 @@ This file acts is the view for the personal information form for my Dating 2 ass
                 <!--Last Name-->
                 <div class="form-group col-md-12">
                     <label for="lastName"><strong>Last Name</strong></label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" value="{{ @lastName }}">
+                    <input type="text" class="form-control" id="lastName" name="lastName" value="{{ @personal['lastName'] }}">
                 </div>
                 <check if="{{ @errors['lastName'] }}">
                     <span class="err">{{ @errors['lastName'] }}</span>
@@ -73,7 +73,7 @@ This file acts is the view for the personal information form for my Dating 2 ass
                 <div class="form-group col-md-12">
                     <label for="age"><strong>Age</strong></label>
 
-                    <input type="number" class="form-control" id="age" name="age" value="{{ @age }}">
+                    <input type="number" class="form-control" id="age" name="age" value="{{ @personal['age'] }}">
                 </div>
                 <check if="{{ @errors['age'] }}">
                     <span class="err">{{ @errors['age'] }}</span>
@@ -88,7 +88,7 @@ This file acts is the view for the personal information form for my Dating 2 ass
                                                         name="gender"
                                                         id="gender-{{ @currentGender }}"
                                                         value="{{ @currentGender }}"
-                            <check if="{{ @gender == @currentGender }}">
+                            <check if="{{ @personal['gender'] == @currentGender }}">
                                 checked='checked'
                             </check>
                         >
@@ -108,7 +108,22 @@ This file acts is the view for the personal information form for my Dating 2 ass
                 <div class="form-group col-md-12">
                     <label for="phone"><strong>Phone Number</strong></label>
 
-                    <input type="tel" class="form-control" id="phone" name="phone" value="{{ @phone }}">
+                    <input type="tel" class="form-control" id="phone" name="phone" value="{{ @personal['phone'] }}">
+
+                </div>
+
+                <!-- Premium Membership -->
+                <div class="form-group col-md-12 ">
+                    <label class=""><strong>Premium Membership</strong></label><br>
+
+                    <input type="checkbox" name="isPremium"
+                           id="premium"
+                           value="yes"
+                    <check if="{{ @premium }}">
+                        checked='checked'
+                    </check>
+                    >
+                    <label for ="premium">Sign me up for a Premium Account!</label>
 
                 </div>
                 <check if="{{ @errors['phone'] }}">

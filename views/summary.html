@@ -39,21 +39,26 @@ This file acts is the view for the summary page for my Dating 2 assignment
         <div class="row">
             <div class = "col-md-6 ">
                     <div class="m-3 border rounded">
-                    <div class="border-bottom p-2">Name: {{ @SESSION.firstName }} {{ @SESSION.lastName }}</div>
-                    <div class="border-bottom p-2">Gender: {{ @SESSION.gender }}</div>
-                    <div class="border-bottom p-2">Age: {{ @SESSION.age }}</div>
-                    <div class="border-bottom p-2">Phone: {{ @SESSION.phone }}</div>
-                    <div class="border-bottom p-2">Email: {{ @SESSION.email }}</div>
-                    <div class="border-bottom p-2">State: {{ @SESSION.state }}</div>
-                    <div class="border-bottom p-2">Seeking: {{ @SESSION.seeking }}</div>
-                    <div class="p-2">Interests:
-                        <repeat group="{{ @SESSION.indoorInterests }}" value="{{ @interest }}">
-                            {{ @interest }}
-                        </repeat>
-                        <repeat group="{{ @SESSION.outdoorInterests }}" value="{{ @interest }}">
-                            {{ @interest }}
-                        </repeat>
-                    </div>
+                    <div class="border-bottom p-2">Name: {{ @fname }} {{ @lname }}</div>
+                    <div class="border-bottom p-2">Gender: {{ @gender }}</div>
+                    <div class="border-bottom p-2">Age: {{ @age }}</div>
+                    <div class="border-bottom p-2">Phone: {{ @phone }}</div>
+                    <div class="border-bottom p-2">Email: {{ @email }}</div>
+                    <div class="border-bottom p-2">State: {{ @state }}</div>
+                    <div class="border-bottom p-2">Seeking: {{ @seeking }}</div>
+                        <check if ="{{ @premium }}">
+                            <div class="p-2">Indoor Interests:
+                                <repeat group="{{ @indoorInterests }}" value="{{ @interest }}">
+                                    {{ @interest }}
+                                </repeat>
+                            </div>
+                            <div class="p-2">Outdoor Interests:
+                                <repeat group="{{ @outdoorInterests }}" value="{{ @interest }}">
+                                    {{ @interest }}
+                                </repeat>
+                            </div>
+
+                        </check>
                 </div>
             </div>
 

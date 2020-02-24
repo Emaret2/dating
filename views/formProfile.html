@@ -45,7 +45,7 @@ This file acts is the view for the profile creation form for my Dating 2 assignm
             <div class="form-row ">
                 <div class="form-group col-md-12">
                     <label for="biography"><strong>Biography</strong></label>
-                    <textarea class = "form-control" id="biography" name="biography">{{@biography}}</textarea>
+                    <textarea class = "form-control" id="biography" name="biography">{{@profile['biography']}}</textarea>
                 </div>
             </div>
         </fieldset>
@@ -59,7 +59,7 @@ This file acts is the view for the profile creation form for my Dating 2 assignm
                 <div class="form-group col-md-12">
                     <label for="email"><strong>Email</strong></label>
                     <input type="email" class="form-control" id="email" placeholder="" name="email"
-                                value = "{{@email}}">
+                                value = "{{@profile['email']}}">
                 </div>
                 <check if="{{ @errors['email'] }}">
                     <span class="err">{{ @errors['email'] }}</span>
@@ -71,7 +71,7 @@ This file acts is the view for the profile creation form for my Dating 2 assignm
                         <repeat group="{{ @states }}" value="{{ @currentState }}">
                             <option value="{{ @currentState }}"
 
-                            <check if="{{ @state == @currentState}}">
+                            <check if="{{ @profile['state'] == @currentState}}">
                                 selected='selected'
                             </check>
                             >{{ @currentState }}</option>
@@ -91,7 +91,7 @@ This file acts is the view for the profile creation form for my Dating 2 assignm
                                    name="seeking"
                                    id="seeking-{{ @currentGender }}"
                                    value="{{ @currentGender }}"
-                            <check if="{{ @seeking == @currentGender }}">
+                            <check if="{{ @profile['seeking'] == @currentGender }}">
                                 checked='checked'
                             </check>
                             >

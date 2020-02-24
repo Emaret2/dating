@@ -49,7 +49,7 @@ This file acts is the view for the interests form for my Dating 2 assignment
                         <input class="form-check-input" type="checkbox" name="indoorInterests[]"
                                id="{{ @interest }}"
                                value="{{ @interest }}"
-                        <check if="{{ isset(@inInts) && in_array(@interest, @inInts) }}">
+                        <check if="{{ isset(@interests['indoorInterests']) && in_array(@interest, @interests['indoorInterests']) }}">
                             checked='checked'
                         </check>
                         >
@@ -85,7 +85,7 @@ This file acts is the view for the interests form for my Dating 2 assignment
                         <input class="form-check-input" type="checkbox" name="outdoorInterests[]"
                                id="{{ @interest }}"
                                value="{{ @interest }}"
-                        <check if="{{ isset(@outInts) && in_array(@interest, @outInts) }}">
+                        <check if="{{ isset(@interests['outdoorInterests']) && in_array(@interest, @interests['outdoorInterests']) }}">
                             checked='checked'
                         </check>
                         >
