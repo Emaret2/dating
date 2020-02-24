@@ -3,10 +3,12 @@
 class DatingController
 {
     private $_f3; //router
+    private $_validator;
 
     public function __construct($f3)
     {
         $this->_f3 = $f3;
+        $this->_validator = new DatingValidator();
     }
 
     public function home()
@@ -37,7 +39,7 @@ class DatingController
 
 
             //If data is valid
-            if (validPersonal()) {
+            if ($this->_validator->validPersonal()) {
 
                 if(!empty($_POST['isPremium'])){
                     $member = new PremiumMember($firstName, $lastName, $age, $gender, $phone);
@@ -80,7 +82,7 @@ class DatingController
 
 
             //If data is valid
-            if (validProfile()) {
+            if ($this->_validator->validProfile()) {
 
                 //Get data from form
                 $member->setEmail($_POST['email']);
@@ -125,7 +127,7 @@ class DatingController
 
 
             //If data is valid
-            if (validInterests()) {
+            if ($this->_validator->validInterests()) {
 
                 //Get data from form
 
