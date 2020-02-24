@@ -22,7 +22,7 @@ session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-require_once('model/validations.php');
+require_once('model/validations.php');  // I tried adding this through composer and updating, but it doesn't seem to work
 
 //Create an instance of the base class
 $f3 = Base::instance();
