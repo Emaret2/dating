@@ -6,18 +6,18 @@ member_id int(10) NOT NULL AUTO_INCREMENT primary key,
 fname varchar(55) NOT NULL,
 lname varchar(255) NOT NULL,
 age int(3) NOT NULL,
-gender varchar(8),
+gender varchar(9),
 phone VARCHAR(20) NOT NULL,
 email varchar(255) NOT NULL,
 state varchar(40) NOT NULL,
-seeking varchar(5) NOT NULL,
+seeking varchar(9) NOT NULL,
 bio varchar(8000),
 premium tinyint(4) NOT NULL,
 image varchar(255) DEFAULT 'images/default.png'
 );
 
-insert into member values(null, 'markus', 'marbles', 24, 'm', '(123)213-2214', 'marblemadness@mail.com', 'wa', 'f',
-'I am the globglogabgalab, the shwabble dobble dibble dobble shwibble swhabble shwab', 0, null);
+insert into member values(null, 'testy', 'test', 24, 'male', '(123)213-2214', 'marblemadness@mail.com', 'wa', 'female',
+'I am the globglogabgalab, the shwabble dobble shwibble shwobble dibble dabble shwab', 0, null);
 
 
 

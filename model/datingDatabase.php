@@ -2,7 +2,9 @@
 
 // Create statements are in initialize.sql
 
-require_once('config-dating.php');
+$user = posix_getpwuid(posix_getuid());
+$userDir = $user['dir'];
+require_once ("$userDir/config-dating.php");
 
 class DatingDatabase
 {
@@ -74,7 +76,7 @@ class DatingDatabase
         $memberInterest = array_merge($member->getInDoorInterests(),$member->getOutDoorInterests());
 
         foreach($memberInterest as $interest ) {
-            $sql = "insert into interest values( :member, :interest)";
+            $sql = "insert into member_interest values( :member, :interest)";
 
             //2. Prepare the statement
             $statement = $this->_dbh->prepare($sql);
@@ -95,7 +97,7 @@ class DatingDatabase
 
 
     public function getMembers(){
-        $sql = "SELECT * FROM member";
+        $sql = "SELECT * FROM member ORDER BY lname";
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -128,7 +130,7 @@ class DatingDatabase
     }
 
     public function getInterests($memberId){
-        $sql = "SELECT * FROM `member-interest` WHERE member_id = :memberID";
+        $sql = "SELECT interest FROM member_interest, interest WHERE member_id = :memberID AND member_interest.interest_id = interest.interest_id;";
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -140,7 +142,7 @@ class DatingDatabase
         $statement->execute();
 
         //5. Get the result
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 

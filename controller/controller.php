@@ -186,7 +186,50 @@ class DatingController
     }
 
 
-    public function admin(){
+    public function admin($f3, $db){
+
+        $allMembers = $db->getMembers();
+        $f3->set('allMembers', $allMembers);
+        $interestArray = array();
+
+        foreach($allMembers as $member){
+            $memberID = $member['member_id'];
+            $interests = $db->getInterests($memberID);
+            $new = array();
+
+
+            foreach($interests as $interest){
+                $array = array($interest['interest']);
+                $new = array_merge($new, $array);
+                //$interests[$interest] = $interest['interest'];
+            }
+
+
+            //echo 'test';
+            //echo "<pre>";
+            //var_dump($new);
+            //echo "</pre>";
+
+            $interests = implode(", ", $new);
+
+            //echo $interests;
+
+            $newMember = array($memberID => $interests);
+
+            $interestArray = $interestArray + $newMember;
+        }
+
+        //echo "<pre>";
+        //var_dump($interestArray);
+        //echo "</pre>";
+
+        $f3->set('interests', $interestArray);
+
+
+        //echo "<pre>";
+        //var_dump($interestArray);
+        //echo "</pre>";
+
         $view = new Template();
         echo $view->render('views/admin.html');
     }

@@ -3,27 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <title>Dating Admin</title>
+
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+
 </head>
 <body>
+<include href="views/navbar.html"></include>
+
+    <table id="member-table" class="display">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Seeking</th>
+            <th>Premium</th>
+            <th>Interests</th>
+        </tr>
+        </thead>
+        <tbody>
+        <repeat group="{{ @allMembers }}" value="{{ @member }}">
+            <tr>
+                <td>{{ @member[member_id]}}</td>
+                <td>{{ @member[fname] }} {{ @member[lname] }}</td>
+                <td>{{ @member[age] }}</td>
+                <td>{{ @member[phone] }}</td>
+                <td>{{ @member[email] }}</td>
+                <td>{{ @member[gender] }}</td>
+                <td>{{ @member[seeking] }}</td>
+                <td>
+                    <input type="checkbox"
+                    <check if="{{@member[premium]}}">
+                        checked='checked'
+                    </check>
+                    >
+                </td>
+                <td>{{ @interests[$member[member_id]] }}</td>
+
+            </tr>
+        </repeat>
+        </tbody>
+    </table>
+
+    <script src="//code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
 
-<table id="volunteer-table" class="display">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Phone</th>
-        <th>Email</th>
-        <th>Gender</th>
-        <th>Seeking</th>
-        <th>Premium</th>
-        <th>Interests</th>
-    </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
-
+    <script>
+        $(document).ready(function() {
+            document.body.style.display = "block";
+            $('#member-table').DataTable( {
+                "order": [[ 0, 'desc' ]],
+                responsive: {
+                    details: {
+                        display: $.fn.dataTable.Responsive.display.modal( {
+                            header: function ( row ) {
+                                var data = row.data();
+                                return 'Details for: ' + ' ' +data[1];
+                            }
+                        } ),
+                        renderer: $.fn.dataTable.Responsive.renderer.tableAll()
+                    }
+                }
+            } );
+        } );
+    </script>
 </body>
 </html>

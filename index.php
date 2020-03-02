@@ -85,9 +85,10 @@ $f3->route('GET /summary', function($f3) {
 
 
 // admin page
-$f3->route('GET /admin', function() {
+$f3->route('GET /admin', function($f3) {
     global $controller;
-    $controller ->admin();
+    global $db;
+    $controller ->admin($f3, $db);
 });
 
 
