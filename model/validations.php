@@ -1,5 +1,7 @@
 <?php
 
+
+
 class DatingValidator
 {
     function validPersonal()

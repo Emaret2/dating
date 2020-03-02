@@ -32,8 +32,6 @@ class DatingController
 
 
 
-
-
             //Add data to hive
 
 
@@ -67,7 +65,7 @@ class DatingController
         echo $view->render('views/formPersonal.html');
     }
 
-    public function profile($f3)
+    public function profile($f3, $db)
     {
         //var_dump($_POST);
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -100,6 +98,7 @@ class DatingController
                 if(is_a($member, 'PremiumMember')) {
                     $f3->reroute('/interests');
                 } else {
+                    $db->insertMember($member, false);
                     $f3->reroute('/summary');
                 }
             } else {
@@ -113,7 +112,7 @@ class DatingController
         echo $view->render('views/formProfile.html');
     }
 
-    public function interests($f3)
+    public function interests($f3, $db)
     {
         //var_dump($_POST);
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -127,7 +126,7 @@ class DatingController
 
 
             //If data is valid
-            if ($this->_validator->validInterests()) {
+            if (true  /*$this->_validator->validInterests()*/) {
 
                 //Get data from form
 
@@ -144,6 +143,8 @@ class DatingController
 
                 //Write data to Session
                 $_SESSION['member'] = $member;
+
+                $db->insertMember($member, true);
 
                 //Redirect to Summary
                 $f3->reroute('/summary');
@@ -163,6 +164,7 @@ class DatingController
 
         $member = $_SESSION['member'];
 
+
         $f3->set('fname', $member->getFname());
         $f3->set('lname', $member->getLname());
         $f3->set('gender', $member->getGender());
@@ -179,12 +181,14 @@ class DatingController
         }
 
 
-
-//    echo "<pre>";
-//    print_r($member);
-//    echo "</pre>";
-
         $view = new Template();
         echo $view->render('views/summary.html');
     }
+
+
+    public function admin(){
+        $view = new Template();
+        echo $view->render('views/admin.html');
+    }
+
 }

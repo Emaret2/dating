@@ -32,10 +32,11 @@ This file acts is the view for the interests form for my Dating 2 assignment
 
 </head>
 <body>
-<header class="navbar bg-light mx-4 mb-4"><a href = "home" class="text-secondary">Galactic Dating Website</a></header>
+<include href="views/navbar.html">
 <div class="container border rounded">
 
     <!-- New Background check on top of form -->
+
 
     <form action="#" method="post" id="formProfile" class="">  <!--Elijah Edit: Added id to form -->
         <h3><strong>Interests</strong></h3>
@@ -47,14 +48,14 @@ This file acts is the view for the interests form for my Dating 2 assignment
                 <repeat group="{{ @indoorInterestsAll }}" value="{{ @interest }}">
                     <div class="form-check col-md-3">
                         <input class="form-check-input" type="checkbox" name="indoorInterests[]"
-                               id="{{ @interest }}"
-                               value="{{ @interest }}"
-                        <check if="{{ isset(@interests['indoorInterests']) && in_array(@interest, @interests['indoorInterests']) }}">
+                               id="{{ @interest.interest }}"
+                               value="{{ @interest.interest_id }}"
+                        <check if="{{ isset(@interests['indoorInterests']) && in_array(@interest.interest, @interests['indoorInterests'].interest) }}">
                             checked='checked'
                         </check>
                         >
-                        <label class="form-check-label" for="{{ @interest }}">
-                            {{ @interest }}
+                        <label class="form-check-label" for="{{ @interest.interest }}">
+                            {{ @interest.interest }}
                         </label>
                     </div>
                     <check if="{{ @interest == @indoorInterestsAll[3] }}">
@@ -83,14 +84,14 @@ This file acts is the view for the interests form for my Dating 2 assignment
                 <repeat group="{{ @outdoorInterestsAll }}" value="{{ @interest }}">
                     <div class="form-check col-md-3">
                         <input class="form-check-input" type="checkbox" name="outdoorInterests[]"
-                               id="{{ @interest }}"
-                               value="{{ @interest }}"
+                               id="{{ @interest.interest_id }}"
+                               value="{{ @interest.interest_id }}"
                         <check if="{{ isset(@interests['outdoorInterests']) && in_array(@interest, @interests['outdoorInterests']) }}">
                             checked='checked'
                         </check>
                         >
-                        <label class="form-check-label" for="{{ @interest }}">
-                            {{ @interest }}
+                        <label class="form-check-label" for="{{ @interest.interest_id }}">
+                            {{ @interest.interest }}
                         </label>
                     </div>
                     <check if="{{ @interest == @outdoorInterestsAll[3] }}">
